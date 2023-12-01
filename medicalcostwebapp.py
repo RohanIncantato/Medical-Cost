@@ -8,15 +8,16 @@ def medical_prediction(input_data):
     
 
     #changing input_data to a numpy array
-    input_data_as_numpy_array= np.asarray(input_data)
+    input_data_as_numpy_array= np.asarray(input_data,dtype=np.float32)
 
     #reshaping the array
     input_data_reshaped=input_data_as_numpy_array.reshape(1,-1)
 
     prediction=loaded_model.predict(input_data_reshaped)
-    print("The inasurence cost in USD" , prediction[0])
+    print("The inasurence cost in USD")
+    return prediction;
     
-    
+  
 def main():
     #giving a title
     st.title('Medical Cost Prediction Web App')
@@ -33,19 +34,20 @@ def main():
     
     region=st.text_input("Region of person:['Southeast':0, 'Southwest':1 ,'Northeast':2, 'Northwest':3]")
     
-    #code for prediction
-    cost=''
     
-    #creating a button for prediction
-    if st.button('Medical cost:'):
-        cost= medical_prediction([age,sex,bmi,smoker,region])
+    # code for Prediction
+    diagnosis = ''
+    
+    # creating a button for Prediction
+    
+    if st.button('Cost Test Result'):
+        diagnosis = medical_prediction([float(age),float(sex),float(bmi),float(children),float(smoker),float(region)])
         
-    st.success(cost) 
+    st.success(diagnosis)
     
-
-
-
-
-
-if _name_ == '_main_':
+    
+    
+    
+    
+if __name__ == '__main__':
     main()
