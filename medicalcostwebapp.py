@@ -3,7 +3,7 @@ import pickle
 import streamlit as st
 
 # Load the model
-loaded_model = pickle.load(open('medicalcostwebapp.py'rb'))
+loaded_model = pickle.load(open('medicalcostwebapp.py','rb'))
 
 def medical_prediction(input_data):
     try:
