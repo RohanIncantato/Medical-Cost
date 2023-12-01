@@ -2,66 +2,45 @@ import numpy as np
 import pickle
 import streamlit as st
 
-loaded_model = pickle.load(open('trained_model.sav', 'rb'))
+# Load the model
+loaded_model = pickle.load(open('C:\\Users\\9797a\\Downloads\\Rohan\\trained_model.sav', 'rb'))
 
 def medical_prediction(input_data):
-    
+    try:
+        # Ensure all input features are numeric
+        input_data = [float(x) for x in input_data]
 
-    #changing input_data to a numpy array
-    input_data_as_numpy_array= np.asarray(input_data)
+        # Reshape the input data
+        input_data_reshaped = np.array(input_data).reshape(1, -1)
 
-    #reshaping the array
-    input_data_reshaped=input_data_as_numpy_array.reshape(1,-1)
+        # Make prediction
+        prediction = loaded_model.predict(input_data_reshaped)
+        return prediction[0]
 
-    prediction=loaded_model.predict(input_data_reshaped)
-    print("The inasurence cost in USD" , prediction[0])
-    
-    
+    except ValueError:
+        return "Error: Please provide valid numeric input for all features."
+
+
 def main():
-    #giving a title
+    # Giving a title
     st.title('Medical Cost Prediction Web App')
-    
-    #getting the inout data from the user
-    
-    age=st.text_input('Age of person:')
-    
-    sex=st.text_input('Gender of person[Male=0 ,Female=1]:')
-    
-    bmi=st.text_input('BMI of person:')
-    
-    smoker=st.text_input('Smoker or not:[Yes=0,No=1]')
-    
-    region=st.text_input("Region of person:['Southeast':0, 'Southwest':1 ,'Northeast':2, 'Northwest':3]")
-    
-    #code for prediction
-    cost=''
-    
-    #creating a button for prediction
-    if st.button('Medical cost:'):
-        cost= medical_prediction([age,sex,bmi,smoker,region])
-        
-    st.success(cost) 
-    
 
+    # Getting the input data from the user
+    age = st.text_input('Age of person:')
+    sex = st.text_input('Sex of person:')
+    bmi = st.text_input('BMI of person:')
+    smoker = st.text_input('Smoker or not:')
+    region = st.text_input('Region of person:')
 
+    # Code for prediction
+    cost = ''
 
+    # Creating a button for prediction
+    if st.button('Medical cost'):
+        cost = medical_prediction([age, sex, bmi, smoker, region])
+
+    st.write("The insurance cost in USD:", cost)
 
 
 if __name__ == '__main__':
     main()
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
