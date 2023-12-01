@@ -1,8 +1,14 @@
 import numpy as np
 import pickle
 import streamlit as st
+import os
+#loaded_model = pickle.load(open('medicalcostwebapp.py', 'rb'))
 
-loaded_model = pickle.load(open('medicalcostwebapp.py', 'rb'))
+
+
+file_path = os.path.abspath('medicalcostwebapp.py')
+loaded_model = pickle.load(open("D:\\ML project\\medicalcostwebapp.py", 'rb'))
+
 
 def medical_prediction(input_data):
     
