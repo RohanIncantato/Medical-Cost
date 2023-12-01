@@ -7,7 +7,7 @@ import os
 
 
 file_path = os.path.abspath('medicalcostwebapp.py')
-loaded_model = pickle.load(open("D:\\ML project\\medicalcostwebapp.py", 'rb'))
+loaded_model = pickle.load(open("medicalcostwebapp.py", 'rb'))
 
 
 def medical_prediction(input_data):
