@@ -32,6 +32,8 @@ def main():
     
     bmi=st.text_input('BMI of person:')
     
+    children=st.text_input('children of person:')
+    
     smoker=st.text_input('Smoker or not:[Yes=0,No=1]')
     
     region=st.text_input("Region of person:['Southeast':0, 'Southwest':1 ,'Northeast':2, 'Northwest':3]")
@@ -43,7 +45,7 @@ def main():
     # creating a button for Prediction
     
     if st.button('Cost Test Result'):
-        diagnosis = medical_prediction([float(age),float(sex),float(bmi),float(children),float(smoker),float(region)])
+        diagnosis = medical_prediction([float(age),float(sex),float(children),float(bmi),float(smoker),float(region)])
         
     st.success(diagnosis)
     
